@@ -1,28 +1,41 @@
 import pytest
-# TODO: add necessary import
-
-# TODO: implement the first test. Change the function name and input as needed
-def test_one():
-    """
-    # add description for the first test
-    """
-    # Your code here
-    pass
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+from ml.model import train_model, inference, compute_model_metrics
 
 
-# TODO: implement the second test. Change the function name and input as needed
-def test_two():
+def test_model_train_type():
     """
-    # add description for the second test
+    Tests that the train_model returns a RandomForestClassifier
     """
-    # Your code here
-    pass
+    X = np.random.rand(20,4)
+    y = np.random.randint(0, 2, size = 20)
+    model = train_model(X,y)
+
+    assert isinstance(model, RandomForestClassifier)
 
 
-# TODO: implement the third test. Change the function name and input as needed
-def test_three():
+
+def test_inference_output():
     """
-    # add description for the third test
+    Test the inference returns the correct number of predictions. 
     """
-    # Your code here
-    pass
+    X = np.random.rand(10,4)
+    y = np.random.randint(0, 2, size=10)
+    model = train_model(X,y)
+    preds = inference(model, X)
+
+    assert len(preds) == len(X)
+
+
+def test_compute_model_metrics_range():
+    """
+    Test that precision, recall, and F1 sscore are between 0 and 1
+    """
+    y_true = np.array([0, 1, 1, 0])
+    y_pred = np.array([0, 1, 0, 0])
+    precision, recall, fbeta = compute_model_metrics(y_true, y_pred)
+
+    assert 0.0 <= precision <= 1.0
+    assert 0.0 <= recall <= 1.0
+    assert 0.0 <= fbeta <= 1.0

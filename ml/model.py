@@ -20,7 +20,7 @@ def train_model(X_train, y_train):
     model
         Trained machine learning model.
     """
-    # implement the function
+    
     model = RandomForestClassifier(random_state = 42)
     model.fit(X_train, y_train)
 
@@ -64,7 +64,7 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    # implement the function
+    
     return model.predict(X)
 
 def save_model(model, path):
@@ -114,7 +114,7 @@ def performance_on_categorical_slice(
         Trained sklearn OneHotEncoder, only used if training=False.
     lb : sklearn.preprocessing._label.LabelBinarizer
         Trained sklearn LabelBinarizer, only used if training=False.
-    model : ???
+    model : RFC
         Model used for the task.
 
     Returns
@@ -124,13 +124,10 @@ def performance_on_categorical_slice(
     fbeta : float
 
     """
-    # TODO: implement the function
+
     slice_data = data[data[column_name] == slice_value]
 
     X_slice, y_slice, _, _ = process_data(
-        # your code here
-        # for input data, use data in column given as "column_name", with the slice_value 
-        # use training = False
         slice_data, 
         categorical_features=categorical_features,
         label=label,
